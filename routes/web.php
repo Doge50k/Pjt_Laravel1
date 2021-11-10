@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\inicialController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+Route::get('/laravel', function () {
     return view('welcome');
 });
 
@@ -24,5 +25,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin',[App\Http\Controllers\AuthController::class, 'dashboard'])->name('admin');
 
-Route::get('/admin/login',[App\Http\Controllers\AuthController::class, 'showLoginform'])->name('admin/login');
+/* Route::get ('/produtos1', [App\Http\Controllers\inicialController::class, 'inicial'])->name ('inicial'); */
+
+Route::resource ('/produtos', inicialController::class);
+
+
 

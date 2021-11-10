@@ -2,24 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categoria;
+use HasFactory;
 
 class produtos extends Model
 {
+    protected $table = 'produtos';
+    protected  $primaryKey = 'IDProduto';
+
     protected $fillable = [
 
-        'IDProduto',
-        'IDCategoria',
+        'Id_cat',
         'NomeProduto',
         'PrecoUnitario',
-        'UnidadesEmEstoque',
+        'UnidadesEmEstoque'
 
     ];
 
-    public function produtos()
+/*     public function relCategoria()
     {
-        return $this->belongsTo(produtos::class,'IDCategoria');
+        return $this->hasOne('App\Models\Categoria','Id_cat');
+    } */
+
+    public function relcategoria()
+    {
+        return $this->belongsTo('App\Models\Categoria','Id_cat','IDCategoria');
     }
 
 }
+
+

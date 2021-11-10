@@ -18,23 +18,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->insert
-        // (
-        //     [
-        //         'name' => Str::random(10),
-        //         'email' => Str::random(10).'@gmail.com',
-        //         'password' => Hash::make('password'),
-        //         'created_at'=> Carbon::now(),
-        //         'updated_at'=> Carbon::now()
-        //     ]
-        // );
-
-        // $user = User::create([
-        //     'name' => 'elias felipe',
-        //     'email' => 'elias@gmail.com',
-        //     'password' => Hash::make('password')
-        // ]);
-
+/*         DB::table('users')->insert
+        (
+            [
+                'name' => Str::random(10),
+                'email' => Str::random(10).'@gmail.com',
+                'password' => Hash::make('password'),
+                'created_at'=> Carbon::now(),
+                'updated_at'=> Carbon::now()
+        ]
+        ); */
         \App\Models\User::factory(5)->create();
+
     }
 }

@@ -11,7 +11,20 @@
 </head>
 <body>
 
+
+    <div class="mt-3 mb-3">
+        <a style="margin-left:94%; " href="/home" >
+
+            <img src={{asset ('/img/IconUser.png')}} style="width:52px;height:52px;">
+
+        </a>
+    </div>
+
+
+
+
     @yield('content')
+    <script src="{{url("assets\bootstrap\javascript\javascript.js")}}"></script>
 
 </body>
 

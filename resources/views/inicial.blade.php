@@ -4,27 +4,25 @@
 
 @section('content')
 
-    <div class='text-center ' >
-        <div style="border:1px solid rgb(45, 35, 134)" class='on-right mb-4'>
-            <a  href="http://127.0.0.1:8000/login" >Login</a>
-
-            <a  href="http://127.0.0.1:8000/register" >Registro</a>
-        </div>
-    </div>
-
     <div class="text-center mt-3 mb-4">
-        <a href="">
+        
+        <a href="http://127.0.0.1:8000" class="ms-2">
+            voltar
+        </a>
+        <a href="{{url('produtos/create')}}">
             <button class="btn btn-success">Cadastrar</button>
         </a>
+
     </div>
 
-    <h1 class="text-center"> Tela inicial de teste</h1>
+    <h1 class="text-center"> Tela de administração</h1>
 
     <div class= "col-8 m-auto">
+        @csrf
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">id</th>
+                <th scope="col"></th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Produto</th>
                 <th scope="col">Preço</th>
@@ -37,23 +35,7 @@
                 @foreach ($produto as $p)
 
                     @php
-                        /* dd($p->IDProduto); */
-
-                        /* $pe=$p->find($p->all('IDProduto'));
-                        dd($pe); */
-
-                        /* $pe=$p->find($p->all('Id_cat'));
-                        dd($pe); */
-
-
-                        /* $pe=$p->find(20)->relcategoria;
-                        dd($pe); */
-
                         $cat = $p->find($p->IDProduto)->relcategoria;
-                        /* dd($pe->NomeCategoria); */
-
-
-
                     @endphp
 
                     <tr>
@@ -68,11 +50,11 @@
                                 <button class="btn btn-dark">Visualizar</button>
                             </a>
 
-                            <a href="">
+                            <a href="{{url("produtos/$p->IDProduto/edit")}}">
                                 <button class="btn btn-primary">Editar</button>
                             </a>
 
-                            <a href="">
+                            <a href="{{url("produtos/$p->IDProduto")}}" class = "js-del">
                                 <button class="btn btn-danger">Deletar</button>
                             </a>
 

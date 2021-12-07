@@ -70,4 +70,12 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    public function showRegister()
+    {
+
+        return view('register');
+
+        // return redirect()->route('register');
+    }
 }

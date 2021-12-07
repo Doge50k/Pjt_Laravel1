@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProdutoRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\models\User;
@@ -29,12 +30,9 @@ class inicialController extends Controller
      */
     public function index()
     {
-
-        /* $produto = Produtos::with('relcategoria')->get();
-        return view('inicial', compact('produto')); */
-
-
-        $produto=Produtos::all()->sortBy('IDProduto');
+        
+        $this->middleware('auth');
+        $produto=Produtos::all()->sortBy('Id_cat');
         return view('inicial',compact('produto'));
 
     }
@@ -46,7 +44,8 @@ class inicialController extends Controller
      */
     public function create()
     {
-        //
+        $Categoria=$this->objCategoria->all();
+        return view('create',compact('Categoria'));
     }
 
     /**
@@ -55,9 +54,18 @@ class inicialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProdutoRequest $request)
     {
-        //
+        $cad=$this->objProdutos->create
+        ([
+            'NomeProduto'=>$request->NomeProduto,
+            'UnidadesEmEstoque'=>$request->UnidadesEmEstoque,
+            'PrecoUnitario'=>$request->PrecoUnitario,
+            'Id_cat'=>$request->Id_cat
+        ]);
+        if($cad){
+            return redirect('produtos');
+        }
     }
 
     /**
@@ -81,7 +89,10 @@ class inicialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $produto = $this->objProdutos->find($id);
+        $Categoria=$this->objCategoria->all();
+
+        return view('create', compact('produto','Categoria'));
     }
 
     /**
@@ -91,9 +102,16 @@ class inicialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProdutoRequest $request, $id)
     {
-        //
+        $this->objProdutos->where(['IDProduto'=>$id])->update
+        ([
+            'NomeProduto'=>$request->NomeProduto,
+            'UnidadesEmEstoque'=>$request->UnidadesEmEstoque,
+            'PrecoUnitario'=>$request->PrecoUnitario,
+            'Id_cat'=>$request->Id_cat
+        ]);
+        return redirect ('produtos');
     }
 
     /**
@@ -104,6 +122,7 @@ class inicialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = $this->objProdutos->destroy($id);
+        return ($delete)?"sim":"não";
     }
 }

@@ -25,8 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin',[App\Http\Controllers\AuthController::class, 'dashboard'])->name('admin');
 
-/* Route::get ('/produtos1', [App\Http\Controllers\inicialController::class, 'inicial'])->name ('inicial'); */
-
 Route::resource ('/produtos', inicialController::class);
 
 
